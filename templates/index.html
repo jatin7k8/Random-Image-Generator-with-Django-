@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %} home {% endblock title %}
+{% block body %}
+
+<div class="container-fluid px-0">
+    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        {% for image in images|slice:":3" %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ image.urls.regular }}" class="d-block w-100 carousel-image" alt="{{ image.alt_description }}">
+          <div class="carousel-caption d-none d-md-block" style="background-color: black; border-radius: 50px;">
+            <h5>{{ image.user.name }}</h5>
+            <p>{{ image.alt_description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <style>
+    .carousel-image {
+      max-width: 1600px;
+      max-height: 600px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  </style>
+</div>
+
+{% comment %} https://getbootstrap.com/docs/4.4/examples/album/ --> linkg of ablum templet which i mofified by my self {% endcomment %}
+<div class="container my-4">
+  <h1 class="my-2 text-center">Select from our range of pictures</h1>
+  <div class="row">
+    {% for image in images|slice:"3:" %}
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="img-container" style="width: 100%; height: 225px; overflow: hidden;">
+          <img src="{{ image.urls.regular }}" class="card-img-top" alt="{{ image.alt_description }}">
+        </div>
+        <div class="card-body" >
+          <p class="card-text">{{ image.alt_description }}  </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+{% endblock body %}
+
+
+
+
+
+
